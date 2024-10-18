@@ -42,7 +42,7 @@ jobs:
     - name: Build
       run: pnpm run build
       env:
-        VITE_LULI_FIREBASE_API_KEY: ${{ secrets.FIREBASE_LULI_API_KEY }}
+        VITE_LULI_FIREBASE_API_KEY: ${{ secrets.VITE_LULI_FIREBASE_API_KEY }}
     - name: Setup Pages
       uses: actions/configure-pages@v4
 

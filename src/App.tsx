@@ -184,7 +184,7 @@ export default function App() {
     return (
       <div style={styles.loginContainer}>
         <button style={styles.button} onClick={handleSignIn}>
-          Sign in with Google
+          Sign in with your Google Account
         </button>
       </div>
     );
