@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   getAuth, 
   signInWithPopup, 
@@ -21,8 +21,9 @@ import {
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from 'firebase/app';
 
+console.log(import.meta.env)
 const firebaseConfig = {
-  apiKey: "AIzaSyAYVakYeuPCFCcDyMzp1cYkF1fzCvbzbIw",
+  apiKey: import.meta.env.VITE_LULI_FIREBASE_API_KEY,
   authDomain: "luli-85342.firebaseapp.com",
   projectId: "luli-85342",
   storageBucket: "luli-85342.appspot.com",
@@ -99,6 +100,8 @@ export default function App() {
   const [note, setNote] = useState('');
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const textareaRef = useRef(null)
+
 
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
@@ -130,6 +133,10 @@ export default function App() {
 
     return () => unsubscribeAuth();
   }, []);
+      useEffect(() => {
+    // Focus the textarea on component mount
+    setTimeout(() => textareaRef.current.focus(), 15)
+  }, [])
 
   const handleSignIn = async () => {
     const provider = new GoogleAuthProvider();
@@ -197,8 +204,10 @@ export default function App() {
 
       <textarea
         style={styles.textarea}
+        spellCheck="false" autoCorrect="off" autoComplete="off"
         value={note}
         onChange={(e) => setNote(e.target.value)}
+        ref={textareaRef}
         onKeyDown={handleNoteSubmit}
         placeholder="Type your note and press Enter to save..."
       />
