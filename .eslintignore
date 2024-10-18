@@ -1,0 +1,3 @@
+*.js       # Ignore JS files if you only want to lint TypeScript
+*.min.js   # Minified JavaScript files
+package.json
